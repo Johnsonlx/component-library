@@ -1,0 +1,31 @@
+[
+    { "category": "Buttons", "title": "Icon Button", "file": "components/buttons/button-icon.html" },
+    { "category": "Buttons", "title": "Primary Button", "file": "components/buttons/button-primary.html" },
+    { "category": "Buttons", "title": "Secondary Button", "file": "components/buttons/button-secondary.html" },
+    { "category": "Buttons", "title": "Custom Button 1", "file": "components/buttons/button1.html" },
+  
+    { "category": "Cards", "title": "Basic Card", "file": "components/cards/card-basic.html" },
+    { "category": "Cards", "title": "Image Card", "file": "components/cards/card-image.html" },
+    { "category": "Cards", "title": "Product Card", "file": "components/cards/card-product.html" },
+    { "category": "Cards", "title": "Custom Card 1", "file": "components/cards/card1.html" },
+  
+    { "category": "Forms", "title": "Contact Form", "file": "components/forms/form-contact.html" },
+    { "category": "Forms", "title": "Login Form", "file": "components/forms/form-login.html" },
+    { "category": "Forms", "title": "Custom Form 1", "file": "components/forms/form1.html" },
+    { "category": "Forms", "title": "Search Form", "file": "components/forms/search-form.html" },
+  
+    { "category": "Modals", "title": "Confirmation Modal", "file": "components/modals/modal-confirmation.html" },
+    { "category": "Modals", "title": "Image Modal", "file": "components/modals/modal-image.html" },
+    { "category": "Modals", "title": "Simple Modal", "file": "components/modals/modal-simple.html" },
+    { "category": "Modals", "title": "Custom Modal 1", "file": "components/modals/modal1.html" },
+  
+    { "category": "Navbars", "title": "Basic Navbar", "file": "components/navbars/navbar-basic.html" },
+    { "category": "Navbars", "title": "Dropdown Navbar", "file": "components/navbars/navbar-dropdown.html" },
+    { "category": "Navbars", "title": "Responsive Navbar", "file": "components/navbars/navbar-responsive.html" },
+    { "category": "Navbars", "title": "Custom Navbar 1", "file": "components/navbars/navbar1.html" },
+  
+    { "category": "Tooltips", "title": "Basic Tooltip", "file": "components/tooltips/tooltip-basic.html" },
+    { "category": "Tooltips", "title": "Icon Tooltip", "file": "components/tooltips/tooltip-icon.html" },
+    { "category": "Tooltips", "title": "Positioned Tooltip", "file": "components/tooltips/tooltip-positions.html" },
+    { "category": "Tooltips", "title": "Custom Tooltip 1", "file": "components/tooltips/tooltip1.html" }
+  ]
