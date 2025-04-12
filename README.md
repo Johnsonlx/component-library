@@ -1,26 +1,22 @@
-# ✨ Meine HTML-Komponentenbibliothek
 
-Willkommen in meiner Sammlung wiederverwendbarer HTML/CSS/JS-Komponenten.  
-Diese Galerie ist über GitHub Pages erreichbar und dient als visuelle Vorschau & Snippet-Sammlung für zukünftige Projekte.
+# Komponenten-Bibliothek
 
----
+Dies ist eine Sammlung von wiederverwendbaren HTML-Komponenten. Hier finden Sie Beispiele für Buttons, Navbars, Cards, Modals, Tooltips und Formulare.
 
-## 🔗 Nützliche Links für Webdesign & UI/UX
+## Verwendete Technologien
 
-- 🎨 [Uiverse.io](https://uiverse.io) – kostenlose UI-Komponenten
-- 💡 [Dribbble](https://dribbble.com) – Design-Inspiration
-- 📘 [MDN Web Docs](https://developer.mozilla.org/de/) – Web-Standards & Doku
-- 🧩 [Heroicons](https://heroicons.com) – SVG-Icons
-- 🚀 [Tailwind CSS](https://tailwindcss.com) – modernes Utility-First-CSS
-- 🧠 [Frontend Mentor](https://www.frontendmentor.io) – Übungsprojekte für UI
-- 🎨 [Canva Colors](https://www.canva.com/colors/) – Farbinspiration und Tools
-- ⭐ [Font Awesome](https://fontawesome.com/) – Beliebte Icon-Bibliothek
-- 🎬 [AOS - Animate on Scroll](https://michalsnik.github.io/aos/) – Scroll-Animationen leicht gemacht
+- HTML
+- CSS
+- JavaScript (für interaktive Komponenten)
 
----
+## Wichtige Links für Webdesigner
 
-## 🛠️ Verwendung
+- [Canva - Farbpalette](https://www.canva.com/colors/)
+- [FontAwesome - Icons](https://fontawesome.com/)
+- [AOS - Scroll-Animationen](https://michalsnik.github.io/aos/)
 
-1. Galerie lokal starten oder per GitHub Pages veröffentlichen
-2. Komponenten nach Kategorie durchstöbern
-3. HTML-Snippets einfach kopieren & verwenden
+## Verwendung
+
+- Kopiere den Code aus den einzelnen Dateien, um Komponenten auf deiner Website zu verwenden.
+- Passe das Design an deine Bedürfnisse an.
+
