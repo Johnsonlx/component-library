@@ -1,3 +1,6 @@
+console.log("Script wird ausgeführt");
+console.log("Basispfad:", window.location.pathname);
+
 const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
@@ -5,10 +8,15 @@ document.body.insertBefore(nav, container);
 
 // Komponenten aus JSON laden
 fetch("components.json")
-  .then(res => res.json())
-  .then(components => {
-    // Kategorien extrahieren (ohne Duplikate)
-    const categories = [...new Set(components.map(c => c.category))];
+  .then(res => {
+    console.log("components.json Status:", res.status);
+    return res.json();
+  })
+  .catch(err => {
+    console.error("Fehler beim Laden von components.json:", err);
+    document.getElementById("components-container").innerHTML = 
+      `<p style="color: red">Fehler beim Laden: ${err.message}. Bitte prüfe die Konsole.</p>`;
+  });
     
     // Navigation erstellen
     categories.forEach(cat => {
