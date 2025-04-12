@@ -1,0 +1,107 @@
+<div class="confirm-modal-demo">
+  <button id="openConfirmBtn" class="confirm-trigger-btn">Bestätigung anfordern</button>
+
+  <div id="confirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+      <div class="confirm-modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <h3 class="confirm-modal-title">Bist du sicher?</h3>
+      <p class="confirm-modal-message">Diese Aktion kann nicht rückgängig gemacht werden. Möchtest du wirklich fortfahren?</p>
+      <div class="confirm-modal-actions">
+        <button class="confirm-btn-cancel">Abbrechen</button>
+        <button class="confirm-btn-danger">Ja, fortfahren</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .confirm-trigger-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .confirm-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+  }
+  .confirm-modal.active {
+    display: flex;
+  }
+  .confirm-modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    padding: 2rem;
+    text-align: center;
+    animation: shakeAnimation 0.4s ease;
+  }
+  @keyframes shakeAnimation {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  .confirm-modal-icon {
+    margin-bottom: 1rem;
+  }
+  .confirm-modal-title {
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+  .confirm-modal-message {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+  }
+  .confirm-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .confirm-btn-cancel {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #212529;
+  }
+  .confirm-btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>
+<script>
+  document.getElementById('openConfirmBtn').addEventListener('click', function() {
+    document.getElementById('confirmModal').classList.add('active');
+  });
+  
+  document.querySelector('.confirm-btn-cancel').addEventListener('click', function() {
+    document.getElementById('confirmModal').classList.remove('active');
+  });
+  
+  document.querySelector('.confirm-btn-danger').addEventListener('click', function() {
+    alert('Aktion bestätigt und durchgeführt!');
+    document.getElementById('confirmModal').classList.remove('active');
+  });
+</script>

@@ -1,0 +1,158 @@
+<div class="contact-form-wrapper">
+  <form class="contact-form">
+    <h2 class="contact-title">Kontaktiere uns</h2>
+    <p class="contact-description">Hinterlasse uns eine Nachricht und wir melden uns schnellstmöglich bei dir.</p>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Dein Name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" class="form-control" placeholder="deine@email.de" required>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="subject">Betreff</label>
+      <input type="text" id="subject" class="form-control" placeholder="Worum geht es?" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Nachricht</label>
+      <textarea id="message" class="form-control" rows="5" placeholder="Deine Nachricht..." required></textarea>
+    </div>
+    
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="consent" class="form-checkbox" required>
+      <label for="consent">Ich stimme der Datenschutzerklärung zu und erlaube die Verarbeitung meiner Daten.</label>
+    </div>
+    
+    <button type="submit" class="contact-submit-btn">Nachricht senden</button>
+  </form>
+</div>
+<style>
+  .contact-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  }
+  
+  .contact-title {
+    color: #3a3a3a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .contact-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.1);
+  }
+  
+  textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .checkbox-group .form-checkbox {
+    margin-top: 0.25rem;
+  }
+  
+  .checkbox-group label {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: normal;
+    line-height: 1.4;
+  }
+  
+  .contact-submit-btn {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .contact-submit-btn:hover {
+    background: #3a7bc8;
+  }
+  
+  @media (max-width: 600px) {
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+</style>
+<script>
+  // Formularvalidierung und -handling
+  document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Einfache Client-seitige Validierung
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (name === '' || email === '' || message === '') {
+      alert('Bitte fülle alle erforderlichen Felder aus.');
+      return;
+    }
+    
+    // Hier würdest du normalerweise die Daten an den Server senden
+    // Für dieses Beispiel zeigen wir nur eine Erfolgsmeldung
+    alert('Vielen Dank für deine Nachricht! Wir werden uns bald bei dir melden.');
+    this.reset();
+  });
+</script>

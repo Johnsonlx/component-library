@@ -1,0 +1,271 @@
+<div class="image-modal-gallery">
+  <h3 class="gallery-title">Bildergalerie</h3>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-image placeholder-image" data-title="Landschaft 1"></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-image placeholder-image" data-title="Architektur"></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-image placeholder-image" data-title="Natur"></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-image placeholder-image" data-title="Stadt"></div>
+    </div>
+  </div>
+  
+  <!-- Image Modal -->
+  <div id="imageModal" class="image-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="image-title" class="modal-image-title">Bildtitel</h3>
+      <div class="modal-image-container">
+        <div class="modal-placeholder-image"></div>
+      </div>
+      <div class="modal-controls">
+        <button id="prevBtn" class="nav-btn prev-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button id="nextBtn" class="nav-btn next-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .image-modal-gallery {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .gallery-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-item {
+    cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: 150px;
+    background-color: #e9ecef;
+  }
+  
+  .placeholder-image {
+    background: linear-gradient(45deg, #f1f3f5, #dee2e6);
+    position: relative;
+  }
+  
+  .placeholder-image::after {
+    content: "🖼️";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+  }
+  
+  /* Modal Styles */
+  .image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    overflow: auto;
+  }
+  
+  .modal-content {
+    position: relative;
+    margin: 5% auto;
+    max-width: 800px;
+    width: 90%;
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-modal:hover {
+    color: #000;
+  }
+  
+  .modal-image-title {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .modal-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 60vh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  
+  .modal-placeholder-image {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(45deg, #dee2e6, #adb5bd);
+    position: relative;
+  }
+  
+  .modal-placeholder-image::after {
+    content: "🖼️";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+  }
+  
+  .modal-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+  
+  .nav-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-btn:hover {
+    background: #e9ecef;
+  }
+  
+  .nav-btn svg {
+    color: #343a40;
+  }
+</style>
+<script>
+  // Gallery und Modal-Interaktion
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const modal = document.getElementById('imageModal');
+  const closeButton = document.querySelector('.close-modal');
+  const modalTitle = document.getElementById('image-title');
+  const prevButton = document.getElementById('prevBtn');
+  const nextButton = document.getElementById('nextBtn');
+  
+  let currentIndex = 0;
+  
+  // Öffnet Modal mit Bild aus der Galerie
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', function() {
+      const imageElement = this.querySelector('.gallery-image');
+      const title = imageElement.getAttribute('data-title');
+      
+      modalTitle.textContent = title;
+      currentIndex = index;
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Verhindert Scrollen des Hintergrunds
+    });
+  });
+  
+  // Modal schließen
+  closeButton.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Aktiviert Scrollen wieder
+  });
+  
+  // Schließen durch Klick auf Hintergrund
+  window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+  
+  // Vorheriges Bild
+  prevButton.addEventListener('click', function() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    updateModalContent();
+  });
+  
+  // Nächstes Bild
+  nextButton.addEventListener('click', function() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    updateModalContent();
+  });
+  
+  // Update Modal-Inhalt basierend auf aktuellem Index
+  function updateModalContent() {
+    const imageElement = galleryItems[currentIndex].querySelector('.gallery-image');
+    const title = imageElement.getAttribute('data-title');
+    modalTitle.textContent = title;
+  }
+  
+  // Tastatur-Navigation
+  document.addEventListener('keydown', function(event) {
+    if (modal.style.display === 'block') {
+      if (event.key === 'ArrowLeft') {
+        prevButton.click();
+      } else if (event.key === 'ArrowRight') {
+        nextButton.click();
+      } else if (event.key === 'Escape') {
+        closeButton.click();
+      }
+    }
+  });
+</script>

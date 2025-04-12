@@ -1,0 +1,59 @@
+<nav class="navbar-dropdown">
+  <a href="#">Home</a>
+  <div class="dropdown">
+    <a href="#" class="dropdown-toggle">Produkte</a>
+    <div class="dropdown-menu">
+      <a href="#">Kategorie 1</a>
+      <a href="#">Kategorie 2</a>
+      <a href="#">Kategorie 3</a>
+    </div>
+  </div>
+  <a href="#">Über uns</a>
+  <a href="#">Kontakt</a>
+</nav>
+<style>
+  .navbar-dropdown {
+    background: #333;
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .navbar-dropdown a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0;
+  }
+  .navbar-dropdown a:hover {
+    color: #ffc107;
+  }
+  .navbar-dropdown .dropdown {
+    position: relative;
+  }
+  .navbar-dropdown .dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.6em;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .navbar-dropdown .dropdown-menu {
+    position: absolute;
+    background: white;
+    min-width: 150px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 100;
+  }
+  .navbar-dropdown .dropdown-menu a {
+    color: #333;
+    padding: 0.7rem 1rem;
+  }
+  .navbar-dropdown .dropdown-menu a:hover {
+    background: #f8f9fa;
+  }
+  .navbar-dropdown .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+</style>

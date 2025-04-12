@@ -1,0 +1,77 @@
+<nav class="navbar-responsive">
+  <div class="logo">MeinLogo</div>
+  <button class="toggle-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Über uns</a>
+    <a href="#">Leistungen</a>
+    <a href="#">Kontakt</a>
+  </div>
+</nav>
+<style>
+  .navbar-responsive {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 0.8rem 1rem;
+    position: relative;
+    color: white;
+  }
+  .navbar-responsive .logo {
+    font-weight: bold;
+  }
+  .navbar-responsive .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .navbar-responsive a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .navbar-responsive a:hover {
+    color: #17a2b8;
+  }
+  .navbar-responsive .toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .navbar-responsive .toggle-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+  @media (max-width: 768px) {
+    .navbar-responsive .toggle-btn {
+      display: block;
+    }
+    .navbar-responsive .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #333;
+      flex-direction: column;
+      padding: 1rem;
+      display: none;
+    }
+    .navbar-responsive.active .nav-links {
+      display: flex;
+    }
+  }
+</style>
+<script>
+  document.querySelector('.toggle-btn').addEventListener('click', function() {
+    document.querySelector('.navbar-responsive').classList.toggle('active');
+  });
+</script>

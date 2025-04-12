@@ -1,0 +1,199 @@
+<div class="search-container">
+  <form class="search-form">
+    <div class="search-input-wrapper">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" class="search-input" placeholder="Suchen..." aria-label="Suche" autofocus>
+      <button type="button" class="clear-search" aria-label="Suche löschen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <button type="submit" class="search-button">Suchen</button>
+  </form>
+  
+  <div class="search-suggestions">
+    <h3>Vorschläge:</h3>
+    <ul class="suggestions-list">
+      <li><a href="#" data-search="Produkte">Produkte</a></li>
+      <li><a href="#" data-search="Dienstleistungen">Dienstleistungen</a></li>
+      <li><a href="#" data-search="Über uns">Über uns</a></li>
+      <li><a href="#" data-search="Support">Support</a></li>
+    </ul>
+  </div>
+</div>
+<style>
+  .search-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .search-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .search-input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 2.5rem;
+    border: 2px solid #eaeaea;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.1);
+  }
+  
+  .clear-search {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+  }
+  
+  .clear-search.visible {
+    display: block;
+  }
+  
+  .search-button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background: #3a7bc8;
+  }
+  
+  .search-suggestions {
+    margin-top: 1.5rem;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #f9f9f9;
+    display: none;
+  }
+  
+  .search-suggestions.visible {
+    display: block;
+  }
+  
+  .search-suggestions h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .suggestions-list li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .suggestions-list a {
+    color: #4a90e2;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    display: block;
+  }
+  
+  .suggestions-list a:hover {
+    text-decoration: underline;
+  }
+</style>
+<script>
+  const searchForm = document.querySelector('.search-form');
+  const searchInput = document.querySelector('.search-input');
+  const clearButton = document.querySelector('.clear-search');
+  const suggestionContainer = document.querySelector('.search-suggestions');
+  const suggestionLinks = document.querySelectorAll('.suggestions-list a');
+  
+  // Zeige/verstecke Clear-Button basierend auf Input-Inhalt
+  searchInput.addEventListener('input', function() {
+    if (this.value.length > 0) {
+      clearButton.classList.add('visible');
+    } else {
+      clearButton.classList.remove('visible');
+    }
+  });
+  
+  // Clear-Button Funktionalität
+  clearButton.addEventListener('click', function() {
+    searchInput.value = '';
+    searchInput.focus();
+    clearButton.classList.remove('visible');
+  });
+  
+  // Such-Vorschläge anzeigen, wenn Fokus auf Suchfeld
+  searchInput.addEventListener('focus', function() {
+    suggestionContainer.classList.add('visible');
+  });
+  
+  // Vorschlag auswählen
+  suggestionLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const searchValue = this.getAttribute('data-search');
+      searchInput.value = searchValue;
+      clearButton.classList.add('visible');
+      suggestionContainer.classList.remove('visible');
+      // Optional: Submit des Formulars auslösen
+      // searchForm.submit();
+    });
+  });
+  
+  // Formular absenden
+  searchForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Hier würde die Suche durchgeführt
+    alert(`Suche nach: ${searchInput.value}`);
+    
+    // Vorschläge nach Suche ausblenden
+    suggestionContainer.classList.remove('visible');
+  });
+  
+  // Klick außerhalb schließt Vorschläge
+  document.addEventListener('click', function(e) {
+    if (!searchForm.contains(e.target) && !suggestionContainer.contains(e.target)) {
+      suggestionContainer.classList.remove('visible');
+    }
+  });
+</script>

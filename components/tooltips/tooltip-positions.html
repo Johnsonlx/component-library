@@ -1,0 +1,128 @@
+<div class="tooltip-positions-demo">
+  <div class="tooltip-wrapper tooltip-top">
+    <button class="tooltip-btn">Oben</button>
+    <span class="tooltip">Tooltip oben</span>
+  </div>
+  
+  <div class="tooltip-wrapper tooltip-right">
+    <button class="tooltip-btn">Rechts</button>
+    <span class="tooltip">Tooltip rechts</span>
+  </div>
+  
+  <div class="tooltip-wrapper tooltip-bottom">
+    <button class="tooltip-btn">Unten</button>
+    <span class="tooltip">Tooltip unten</span>
+  </div>
+  
+  <div class="tooltip-wrapper tooltip-left">
+    <button class="tooltip-btn">Links</button>
+    <span class="tooltip">Tooltip links</span>
+  </div>
+</div>
+<style>
+  .tooltip-positions-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-btn {
+    background: #17a2b8;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    background: #343a40;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+  
+  /* Tooltip arrow base */
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+  }
+  
+  /* Top tooltip */
+  .tooltip-top .tooltip {
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-top .tooltip::after {
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-color: #343a40 transparent transparent transparent;
+  }
+  
+  /* Right tooltip */
+  .tooltip-right .tooltip {
+    top: 50%;
+    left: 125%;
+    transform: translateY(-50%);
+  }
+  
+  .tooltip-right .tooltip::after {
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-color: transparent #343a40 transparent transparent;
+  }
+  
+  /* Bottom tooltip */
+  .tooltip-bottom .tooltip {
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-bottom .tooltip::after {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-color: transparent transparent #343a40 transparent;
+  }
+  
+  /* Left tooltip */
+  .tooltip-left .tooltip {
+    top: 50%;
+    right: 125%;
+    transform: translateY(-50%);
+  }
+  
+  .tooltip-left .tooltip::after {
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-color: transparent transparent transparent #343a40;
+  }
+  
+  /* Show on hover */
+  .tooltip-wrapper:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>

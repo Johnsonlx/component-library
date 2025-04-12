@@ -1,0 +1,58 @@
+<div class="tooltip-container">
+  <button class="tooltip-trigger">Hover für Info</button>
+  <span class="tooltip-text">Das ist ein einfacher Tooltip mit Informationen</span>
+</div>
+<style>
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-trigger {
+    background: #6610f2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tooltip-text {
+    visibility: hidden;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    width: 200px;
+    
+    /* Position */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    
+    /* Fade in/out */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Arrow */
+  .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+  
+  /* Show tooltip on hover */
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
