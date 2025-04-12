@@ -2,26 +2,36 @@ body {
   font-family: sans-serif;
   padding: 2rem;
   background: #f9f9f9;
-  color: #333;
 }
 h1 {
-  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+}
+h2 {
+  margin-top: 3rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.3rem;
 }
 .component {
-  border: 1px solid #ccc;
   background: white;
   padding: 1rem;
   margin-bottom: 2rem;
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 .preview {
-  margin: 1rem 0;
+  border: 1px solid #eee;
+  padding: 1rem;
+  background: #fff;
+  margin-bottom: 1rem;
+}
+pre {
+  background: #f4f4f4;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
 }
 code {
-  background: #eee;
-  padding: 0.2rem 0.4rem;
-}
-h2 {
-  margin-top: 3rem;
-  color: #007bff;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
