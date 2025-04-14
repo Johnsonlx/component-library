@@ -22,7 +22,6 @@
     { "category": "Modals", "title": "Image Modal", "file": "components/modals/modal-image.html" },
     { "category": "Modals", "title": "Simple Modal", "file": "components/modals/modal-simple.html" },
     { "category": "Modals", "title": "Custom Modal 1", "file": "components/modals/modal1.html" },
-    { "category": "Modals", "title": "Modal Tailwind", "file": "components/modals/modal-tailwind.html" },
   
     { "category": "Navbars", "title": "Basic Navbar", "file": "components/navbars/navbar-basic.html" },
     { "category": "Navbars", "title": "Dropdown Navbar", "file": "components/navbars/navbar-dropdown.html" },
