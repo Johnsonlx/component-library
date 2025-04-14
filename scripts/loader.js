@@ -2,15 +2,20 @@ const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
 
-// Navigation vor den Komponenten-Container innerhalb von <main> einfügen
-document.querySelector("main").insertBefore(nav, container);
+// Navigation einfügen (robust)
+if (container && container.parentElement === document.body) {
+  document.body.insertBefore(nav, container);
+} else {
+  document.querySelector("main").insertBefore(nav, container);
+}
 
 fetch("components.json")
   .then(res => res.json())
   .then(components => {
-    const categories = [...new Set(components.map(c => c.category))];
+    // 🔤 Erst alle Kategorien alphabetisch ermitteln
+    const categories = [...new Set(components.map(c => c.category))].sort();
 
-    // Navigation aufbauen
+    // 📌 Navigation aufbauen
     categories.forEach(cat => {
       const link = document.createElement("a");
       link.href = `#${cat}`;
@@ -18,7 +23,15 @@ fetch("components.json")
       nav.appendChild(link);
     });
 
-    // Komponenten anzeigen
+    // 🔁 Komponenten nach Kategorie + Titel sortieren
+    components.sort((a, b) => {
+      if (a.category === b.category) {
+        return a.title.localeCompare(b.title);
+      }
+      return a.category.localeCompare(b.category);
+    });
+
+    // 🔢 Komponenten darstellen, sauber unter ihrer Kategorie
     let currentCategory = "";
     components.forEach(component => {
       if (component.category !== currentCategory) {
