@@ -1,7 +1,14 @@
 const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
-document.body.insertBefore(nav, container);
+
+// Navigation sicher vor dem container einfügen
+if (container && container.parentElement === document.body) {
+  document.body.insertBefore(nav, container);
+} else {
+  // Falls container nicht direktes Kind von <body> ist (z. B. in <main>)
+  document.querySelector("main").insertBefore(nav, container);
+}
 
 fetch("components.json")
   .then(res => res.json())
@@ -29,7 +36,12 @@ fetch("components.json")
       }
 
       fetch(component.file)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`Datei nicht gefunden: ${component.file}`);
+          }
+          return res.text();
+        })
         .then(html => {
           const div = document.createElement("div");
           div.className = "component";
