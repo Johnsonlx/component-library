@@ -2,18 +2,12 @@ const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
 
-// Navigation sicher vor dem container einfügen
-if (container && container.parentElement === document.body) {
-  document.body.insertBefore(nav, container);
-} else {
-  // Falls container nicht direktes Kind von <body> ist (z. B. in <main>)
-  document.querySelector("main").insertBefore(nav, container);
-}
+// Navigation vor den Komponenten-Container innerhalb von <main> einfügen
+document.querySelector("main").insertBefore(nav, container);
 
 fetch("components.json")
   .then(res => res.json())
   .then(components => {
-    // Alle Kategorien herausfiltern
     const categories = [...new Set(components.map(c => c.category))];
 
     // Navigation aufbauen
@@ -24,7 +18,7 @@ fetch("components.json")
       nav.appendChild(link);
     });
 
-    // Komponenten darstellen
+    // Komponenten anzeigen
     let currentCategory = "";
     components.forEach(component => {
       if (component.category !== currentCategory) {
