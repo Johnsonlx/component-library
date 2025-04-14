@@ -1,44 +1,33 @@
-console.log("Script wird ausgeführt");
-console.log("Basispfad:", window.location.pathname);
-
 const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
 document.body.insertBefore(nav, container);
 
-// Komponenten aus JSON laden
 fetch("components.json")
-  .then(res => {
-    console.log("components.json Status:", res.status);
-    return res.json();
-  })
-  .catch(err => {
-    console.error("Fehler beim Laden von components.json:", err);
-    document.getElementById("components-container").innerHTML = 
-      `<p style="color: red">Fehler beim Laden: ${err.message}. Bitte prüfe die Konsole.</p>`;
-  });
-    
-    // Navigation erstellen
+  .then(res => res.json())
+  .then(components => {
+    // Alle Kategorien herausfiltern
+    const categories = [...new Set(components.map(c => c.category))];
+
+    // Navigation aufbauen
     categories.forEach(cat => {
       const link = document.createElement("a");
       link.href = `#${cat}`;
       link.textContent = cat;
       nav.appendChild(link);
     });
-    
-    // Komponenten nach Kategorien gruppieren und anzeigen
+
+    // Komponenten darstellen
     let currentCategory = "";
     components.forEach(component => {
       if (component.category !== currentCategory) {
-        // Neue Kategorie-Überschrift erstellen
         const heading = document.createElement("h2");
         heading.id = component.category;
         heading.textContent = component.category;
         container.appendChild(heading);
         currentCategory = component.category;
       }
-      
-      // HTML für die Komponente laden
+
       fetch(component.file)
         .then(res => res.text())
         .then(html => {
@@ -50,30 +39,22 @@ fetch("components.json")
             <pre><button class="copy-btn">Copy</button><code>${html.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
           `;
           container.appendChild(div);
-          
-          // Event-Listener für den Kopier-Button
+
           const copyBtn = div.querySelector(".copy-btn");
           copyBtn.addEventListener("click", () => {
             const codeText = div.querySelector("code").textContent;
             navigator.clipboard.writeText(codeText)
               .then(() => {
-                // Feedback für erfolgreichen Kopiervorgang
-                const originalText = copyBtn.textContent;
                 copyBtn.textContent = "Kopiert!";
-                setTimeout(() => {
-                  copyBtn.textContent = originalText;
-                }, 2000);
+                setTimeout(() => copyBtn.textContent = "Copy", 2000);
               })
-              .catch(err => {
-                console.error("Fehler beim Kopieren:", err);
-              });
+              .catch(err => console.error("Fehler beim Kopieren:", err));
           });
         })
-        .catch(error => {
-          console.error(`Fehler beim Laden von ${component.file}:`, error);
-        });
+        .catch(err => console.error(`Fehler beim Laden von ${component.file}:`, err));
     });
   })
-  .catch(error => {
-    console.error("Fehler beim Laden der components.json:", error);
+  .catch(err => {
+    console.error("Fehler beim Laden der components.json:", err);
+    container.innerHTML = `<p style="color:red">Fehler beim Laden der Komponenten. Prüfe die Konsole.</p>`;
   });
