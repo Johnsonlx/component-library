@@ -3,11 +3,15 @@
     { "category": "Buttons", "title": "Primary Button", "file": "components/buttons/button-primary.html" },
     { "category": "Buttons", "title": "Secondary Button", "file": "components/buttons/button-secondary.html" },
     { "category": "Buttons", "title": "Custom Button 1", "file": "components/buttons/button1.html" },
+    { "category": "Buttons", "title": "Outline Button", "file": "components/buttons/button-outline.html" },
+    { "category": "Buttons", "title": "Gradient Button", "file": "components/buttons/button-gradient.html" },
   
     { "category": "Cards", "title": "Basic Card", "file": "components/cards/card-basic.html" },
     { "category": "Cards", "title": "Image Card", "file": "components/cards/card-image.html" },
     { "category": "Cards", "title": "Product Card", "file": "components/cards/card-product.html" },
     { "category": "Cards", "title": "Custom Card 1", "file": "components/cards/card1.html" },
+  { "category": "Cards", "title": "Profile Card", "file": "components/cards/card-profile.html" },
+  { "category": "Cards", "title": "Pricing Card", "file": "components/cards/card-pricing.html" },
   
     { "category": "Forms", "title": "Contact Form", "file": "components/forms/form-contact.html" },
     { "category": "Forms", "title": "Login Form", "file": "components/forms/form-login.html" },
