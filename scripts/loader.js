@@ -2,6 +2,10 @@ const container = document.getElementById("components-container");
 const nav = document.createElement("nav");
 nav.id = "category-nav";
 
+// Sicherstellen, dass das nav-Element ganz oben im main-Container landet
+const main = document.querySelector("main");
+main.insertBefore(nav, main.firstChild);
+
 // Navigation einfügen
 if (container && container.parentElement === document.body) {
   document.body.insertBefore(nav, container);
