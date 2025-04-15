@@ -10,50 +10,53 @@
   
 <body class="bg-gray-50 text-gray-800 scroll-smooth">
 
-    <header class="bg-gray-900 text-white py-8 text-center">
-      <h1 class="text-4xl font-bold">Meine HTML-Komponentengalerie</h1>
-    </header>
-
-  <!-- Mobile Navigation -->
+  <!-- Mobile Toggle -->
   <div class="md:hidden fixed top-4 left-4 z-50">
     <button id="menu-toggle" class="text-white bg-gray-800 p-2 rounded">
       ☰
     </button>
   </div>
 
- <!-- Sticky Kategorie-Navigation -->
+  <!-- Sticky Navigation -->
   <nav id="category-nav" class="sticky top-0 z-40 bg-white shadow-md py-3 px-4 flex-wrap gap-2 justify-center border-b border-gray-200 hidden md:flex">
-    <!-- wird per JS befüllt -->
+    <!-- JS füllt Kategorien -->
   </nav>
 
-  <!-- Mobile Menu Dropdown -->
+  <!-- Mobile Dropdown Navigation -->
   <div id="mobile-menu" class="md:hidden bg-white shadow-md fixed top-14 left-4 right-4 z-40 rounded-lg border border-gray-200 p-4 hidden">
-    <!-- wird per JS befüllt -->
+    <!-- JS füllt Kategorien -->
   </div>
 
+  <header class="bg-gray-900 text-white py-8 text-center">
+    <h1 class="text-4xl font-bold">Meine HTML-Komponentengalerie</h1>
+  </header>
+
   <!-- Nützliche Links aus der README -->
-  <section class="max-w-4xl mx-auto my-8 px-4">
+ <section class="max-w-4xl mx-auto my-8 px-4">
     <h2 class="text-xl font-bold mb-4">🔗 Nützliche Links für Webdesign & UI/UX</h2>
     <ul class="list-disc pl-6 space-y-2 text-blue-600">
-        <li><a href="https://uiverse.io" target="_blank">🎨 Uiverse.io – kostenlose UI-Komponenten</a></li>
-        <li><a href="https://dribbble.com" target="_blank">💡 Dribbble – Design-Inspiration</a></li>
-        <li><a href="https://developer.mozilla.org/de/" target="_blank">📘 MDN Web Docs – Web-Standards & Doku</a></li>
-        <li><a href="https://heroicons.com" target="_blank">🧩 Heroicons – SVG-Icons</a></li>
-        <li><a href="https://tailwindcss.com" target="_blank">🚀 Tailwind CSS – modernes Utility-First-CSS</a></li>
-        <li><a href="https://www.frontendmentor.io" target="_blank">🧠 Frontend Mentor – Übungsprojekte für UI</a></li>
-        <li><a href="https://www.canva.com/colors/" target="_blank">🎨 Canva Colors – Farbinspiration und Tools</a></li>
-        <li><a href="https://fontawesome.com" target="_blank">⭐ Font Awesome – Beliebte Icon-Bibliothek</a></li>
-        <li><a href="https://michalsnik.github.io/aos/" target="_blank">🎬 AOS - Animate on Scroll – Scroll-Animationen leicht gemacht</a></li>
+      <li><a href="https://uiverse.io" target="_blank">🎨 Uiverse.io – kostenlose UI-Komponenten</a></li>
+      <li><a href="https://dribbble.com" target="_blank">💡 Dribbble – Design-Inspiration</a></li>
+      <li><a href="https://developer.mozilla.org/de/" target="_blank">📘 MDN Web Docs – Web-Standards & Doku</a></li>
+      <li><a href="https://heroicons.com" target="_blank">🧩 Heroicons – SVG-Icons</a></li>
+      <li><a href="https://tailwindcss.com" target="_blank">🚀 Tailwind CSS – modernes Utility-First-CSS</a></li>
+      <li><a href="https://www.frontendmentor.io" target="_blank">🧠 Frontend Mentor – Übungsprojekte für UI</a></li>
+      <li><a href="https://www.canva.com/colors/" target="_blank">🎨 Canva Colors – Farbinspiration und Tools</a></li>
+      <li><a href="https://fontawesome.com" target="_blank">⭐ Font Awesome – Beliebte Icon-Bibliothek</a></li>
+      <li><a href="https://michalsnik.github.io/aos/" target="_blank">🎬 AOS - Animate on Scroll – Scroll-Animationen leicht gemacht</a></li>
     </ul>
   </section>
-
+  
   <main class="container mx-auto px-4">
     <div id="components-container"></div>
   </main>
 
-  <button id="backToTopBtn"
-    class="fixed bottom-5 right-5 z-50 bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition hidden"
-    title="Zurück nach oben">
+  <footer class="text-center py-6 bg-gray-900 text-white mt-12">
+    <p>&copy; 2025 Meine Komponentengalerie</p>
+  </footer>
+
+  <!-- Zurück nach oben -->
+  <button id="backToTopBtn" class="fixed bottom-5 right-5 z-50 bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition hidden" title="Zurück nach oben">
     ⬆️
   </button>
 
