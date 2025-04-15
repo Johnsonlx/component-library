@@ -78,13 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.getElementById('backToTopBtn');
   const container = document.getElementById('components-container');
 
-  // Dummy-Kategorien zum Test
-  const categories = [
-    { id: 'buttons', label: 'Buttons' },
-    { id: 'modals', label: 'Modals' },
-    { id: 'forms', label: 'Formulare' },
-  ];
-
   // Dummy-Komponenten
   const components = {
     buttons: `<div id="buttons" class="mb-12"><h2 class="text-2xl font-bold mb-4">Buttons</h2>
