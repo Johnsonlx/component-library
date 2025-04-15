@@ -7,6 +7,10 @@ html {
     transform: translateY(-2px);
 }
 
+.active-category {
+        background-color: #1f2937 !important;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
