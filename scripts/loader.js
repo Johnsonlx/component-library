@@ -78,6 +78,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.getElementById('backToTopBtn');
   const container = document.getElementById('components-container');
 
+  // Dummy-Kategorien zum Test
+  const categories = [
+    { id: 'buttons', label: 'Buttons' },
+    { id: 'modals', label: 'Modals' },
+    { id: 'forms', label: 'Formulare' },
+  ];
+
+  // Dummy-Komponenten
+  const components = {
+    buttons: `<div id="buttons" class="mb-12"><h2 class="text-2xl font-bold mb-4">Buttons</h2>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Primary</button>
+    </div>`,
+    modals: `<div id="modals" class="mb-12"><h2 class="text-2xl font-bold mb-4">Modals</h2>
+      <p>Demo Modal hier...</p>
+    </div>`,
+    forms: `<div id="forms" class="mb-12"><h2 class="text-2xl font-bold mb-4">Formulare</h2>
+      <input type="text" class="border p-2 rounded w-full" placeholder="Dein Name" />
+    </div>`
+  };
 
   // Komponenten laden
   categories.forEach(cat => {
