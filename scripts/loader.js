@@ -72,71 +72,86 @@
 
 
 // Scrollspy + Zurück nach oben + Mobile Menü
-document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.getElementById('category-nav');
-  const toggleNav = document.getElementById('toggleNav');
-  const backToTopBtn = document.getElementById('backToTopBtn');
-  const container = document.getElementById('components-container');
-
-  // Dummy-Kategorien zum Test
+document.addEventListener("DOMContentLoaded", () => {
   const categories = [
-    { id: 'buttons', label: 'Buttons' },
-    { id: 'modals', label: 'Modals' },
-    { id: 'forms', label: 'Formulare' },
+    { id: "buttons", label: "Buttons" },
+    { id: "modals", label: "Modals" },
+    { id: "forms", label: "Formulare" }
   ];
 
-  // Dummy-Komponenten
   const components = {
-    buttons: `<div id="buttons" class="mb-12"><h2 class="text-2xl font-bold mb-4">Buttons</h2>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Primary</button>
-    </div>`,
-    modals: `<div id="modals" class="mb-12"><h2 class="text-2xl font-bold mb-4">Modals</h2>
-      <p>Demo Modal hier...</p>
-    </div>`,
-    forms: `<div id="forms" class="mb-12"><h2 class="text-2xl font-bold mb-4">Formulare</h2>
-      <input type="text" class="border p-2 rounded w-full" placeholder="Dein Name" />
-    </div>`
+    buttons: `
+      <section id="buttons">
+        <h2 class="text-2xl font-semibold mb-4">Buttons</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold mb-2">Primärer Button</h3>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Klick mich</button>
+          </div>
+        </div>
+      </section>
+    `,
+    modals: `
+      <section id="modals">
+        <h2 class="text-2xl font-semibold mb-4">Modals</h2>
+        <p class="text-gray-600">Modal-Vorlage kommt hier hin.</p>
+      </section>
+    `,
+    forms: `
+      <section id="forms">
+        <h2 class="text-2xl font-semibold mb-4">Formulare</h2>
+        <form class="space-y-4">
+          <input type="text" placeholder="Name" class="border px-4 py-2 rounded w-full" />
+          <input type="email" placeholder="E-Mail" class="border px-4 py-2 rounded w-full" />
+          <button class="bg-green-600 text-white px-4 py-2 rounded">Absenden</button>
+        </form>
+      </section>
+    `
   };
 
-  // Komponenten laden
-  categories.forEach(cat => {
-    container.insertAdjacentHTML('beforeend', components[cat.id]);
+  const container = document.getElementById("components-container");
+  const nav = document.getElementById("category-nav");
+  const mobileNav = document.getElementById("mobile-nav");
 
-    const link = document.createElement('a');
-    link.href = `#${cat.id}`;
-    link.textContent = cat.label;
-    link.className = 'px-3 py-1 rounded bg-gray-700 text-white text-sm hover:bg-gray-800 transition';
-    nav.appendChild(link);
+  // Navigation & Komponenten einfügen
+  categories.forEach(cat => {
+    [nav, mobileNav].forEach(navEl => {
+      const link = document.createElement("a");
+      link.href = `#${cat.id}`;
+      link.textContent = cat.label;
+      link.className = "text-sm px-3 py-2 rounded bg-gray-700 text-white hover:bg-gray-900 transition";
+      link.setAttribute("data-target", cat.id);
+      navEl.appendChild(link);
+    });
+    container.innerHTML += components[cat.id];
+  });
+
+  // Back to Top
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("hidden", window.scrollY < 300);
+  });
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // Mobile Toggle
+  document.getElementById("menu-toggle").addEventListener("click", () => {
+    mobileNav.classList.toggle("hidden");
   });
 
   // Scrollspy
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    categories.forEach(cat => {
-      const section = document.getElementById(cat.id);
-      const link = nav.querySelector(`a[href="#${cat.id}"]`);
-      if (section.offsetTop <= scrollY + 100 && section.offsetTop + section.offsetHeight > scrollY + 100) {
-        link.classList.add('active-link');
-      } else {
-        link.classList.remove('active-link');
-      }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute("id");
+      document.querySelectorAll(`[data-target]`).forEach(link => {
+        if (link.getAttribute("data-target") === id) {
+          link.classList.toggle("active-category", entry.isIntersecting);
+        }
+      });
     });
+  }, { rootMargin: "-50% 0px -50% 0px", threshold: 0.1 });
 
-    // Zurück nach oben anzeigen
-    if (scrollY > 400) {
-      backToTopBtn.classList.remove('hidden');
-    } else {
-      backToTopBtn.classList.add('hidden');
-    }
-  });
-
-  // Zurück nach oben
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Mobile Nav Toggle
-  toggleNav?.addEventListener('click', () => {
-    nav.classList.toggle('hidden');
+  categories.forEach(cat => {
+    const section = document.getElementById(cat.id);
+    if (section) observer.observe(section);
   });
 });
