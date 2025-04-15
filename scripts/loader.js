@@ -71,53 +71,72 @@
         });
 
 
-
 // Scrollspy + Zurück nach oben + Mobile Menü
-document.addEventListener("DOMContentLoaded", () => {
-  const nav = document.getElementById("category-nav");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const menuToggle = document.getElementById("menu-toggle");
-  const backToTopBtn = document.getElementById("backToTopBtn");
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('category-nav');
+  const toggleNav = document.getElementById('toggleNav');
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  const container = document.getElementById('components-container');
 
-  // Toggle Mobile Menu
-  menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
+  // Dummy-Kategorien zum Test
+  const categories = [
+    { id: 'buttons', label: 'Buttons' },
+    { id: 'modals', label: 'Modals' },
+    { id: 'forms', label: 'Formulare' },
+  ];
+
+  // Dummy-Komponenten
+  const components = {
+    buttons: `<div id="buttons" class="mb-12"><h2 class="text-2xl font-bold mb-4">Buttons</h2>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Primary</button>
+    </div>`,
+    modals: `<div id="modals" class="mb-12"><h2 class="text-2xl font-bold mb-4">Modals</h2>
+      <p>Demo Modal hier...</p>
+    </div>`,
+    forms: `<div id="forms" class="mb-12"><h2 class="text-2xl font-bold mb-4">Formulare</h2>
+      <input type="text" class="border p-2 rounded w-full" placeholder="Dein Name" />
+    </div>`
+  };
+
+  // Komponenten laden
+  categories.forEach(cat => {
+    container.insertAdjacentHTML('beforeend', components[cat.id]);
+
+    const link = document.createElement('a');
+    link.href = `#${cat.id}`;
+    link.textContent = cat.label;
+    link.className = 'px-3 py-1 rounded bg-gray-700 text-white text-sm hover:bg-gray-800 transition';
+    nav.appendChild(link);
   });
 
   // Scrollspy
-  const links = document.querySelectorAll("#category-nav a, #mobile-menu a");
-  const sections = Array.from(document.querySelectorAll("section[id]"));
-
-  const highlightCurrentSection = () => {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      const sectionId = section.getAttribute("id");
-
-      if (scrollY >= sectionTop) {
-        links.forEach(link => {
-          link.classList.remove("bg-blue-600", "text-white");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("bg-blue-600", "text-white");
-          }
-        });
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    categories.forEach(cat => {
+      const section = document.getElementById(cat.id);
+      const link = nav.querySelector(`a[href="#${cat.id}"]`);
+      if (section.offsetTop <= scrollY + 100 && section.offsetTop + section.offsetHeight > scrollY + 100) {
+        link.classList.add('active-link');
+      } else {
+        link.classList.remove('active-link');
       }
     });
-  };
 
-  window.addEventListener("scroll", () => {
-    highlightCurrentSection();
-
-    // Back-to-top Button
-    if (window.scrollY > 300) {
-      backToTopBtn.classList.remove("hidden");
+    // Zurück nach oben anzeigen
+    if (scrollY > 400) {
+      backToTopBtn.classList.remove('hidden');
     } else {
-      backToTopBtn.classList.add("hidden");
+      backToTopBtn.classList.add('hidden');
     }
   });
 
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  // Zurück nach oben
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Mobile Nav Toggle
+  toggleNav?.addEventListener('click', () => {
+    nav.classList.toggle('hidden');
   });
 });
