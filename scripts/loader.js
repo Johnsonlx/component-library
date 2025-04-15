@@ -69,3 +69,55 @@
           console.error("Fehler beim Laden der components.json:", err);
           container.innerHTML = `<p class="text-red-600">Fehler beim Laden der Komponenten. Prüfe die Konsole.</p>`;
         });
+
+
+
+// Scrollspy + Zurück nach oben + Mobile Menü
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.getElementById("category-nav");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuToggle = document.getElementById("menu-toggle");
+  const backToTopBtn = document.getElementById("backToTopBtn");
+
+  // Toggle Mobile Menu
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  // Scrollspy
+  const links = document.querySelectorAll("#category-nav a, #mobile-menu a");
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+
+  const highlightCurrentSection = () => {
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      const sectionId = section.getAttribute("id");
+
+      if (scrollY >= sectionTop) {
+        links.forEach(link => {
+          link.classList.remove("bg-blue-600", "text-white");
+          if (link.getAttribute("href") === `#${sectionId}`) {
+            link.classList.add("bg-blue-600", "text-white");
+          }
+        });
+      }
+    });
+  };
+
+  window.addEventListener("scroll", () => {
+    highlightCurrentSection();
+
+    // Back-to-top Button
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.remove("hidden");
+    } else {
+      backToTopBtn.classList.add("hidden");
+    }
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
