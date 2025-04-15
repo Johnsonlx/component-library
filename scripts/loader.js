@@ -129,4 +129,3 @@ ocument.addEventListener("DOMContentLoaded", () => {
   createTabs();
   renderComponents();
 });
-
