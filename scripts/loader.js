@@ -1,131 +1,131 @@
-ocument.addEventListener("DOMContentLoaded", () => {
-  const componentsContainer = document.getElementById("components-container");
-  const tabsContainer = document.getElementById("tabs");
-  const searchInput = document.getElementById("searchInput");
-  const categoryNav = document.getElementById("category-nav");
-  const backToTop = document.getElementById("backToTop");
-  const mobileNav = document.getElementById("mobile-nav");
-  const menuToggle = document.getElementById("menu-toggle");
+const container = document.getElementById("components-container");
+const nav = document.getElementById("category-nav");
+const mobileNav = document.getElementById("mobile-nav");
+const searchInput = document.getElementById("searchInput");
+const tabsContainer = document.getElementById("tabs");
+const backToTop = document.getElementById("backToTop");
 
-  const components = [
-    { category: "Buttons", name: "Primärer Button", html: "<button class='bg-blue-500 text-white px-4 py-2 rounded'>Klick mich</button>" },
-    { category: "Buttons", name: "Sekundärer Button", html: "<button class='bg-gray-300 text-black px-4 py-2 rounded'>Abbrechen</button>" },
-    { category: "Modals", name: "Einfaches Modal", html: "<div class='p-4 border rounded shadow'>Modal-Inhalt</div>" },
-    { category: "Cards", name: "Info-Karte", html: "<div class='p-4 bg-white border rounded shadow'>Kartentext</div>" },
-    { category: "Formulare", name: "Login Formular", html: "<form><input class='border p-2 rounded w-full mb-2' placeholder='Benutzername'><input class='border p-2 rounded w-full mb-2' placeholder='Passwort' type='password'><button class='bg-blue-500 text-white px-4 py-2 rounded w-full'>Login</button></form>" }
-  ];
+let allComponents = [];
 
-  const categories = [...new Set(components.map(c => c.category))];
-
-  function createTabs() {
-    tabsContainer.innerHTML = "";
-    categories.forEach(category => {
-      const tab = document.createElement("button");
-      tab.textContent = category;
-      tab.className = "px-3 py-1 bg-gray-200 hover:bg-blue-500 hover:text-white rounded text-sm";
-      tab.addEventListener("click", () => {
-        document.getElementById(`section-${category}`).scrollIntoView({ behavior: "smooth" });
-      });
-      tabsContainer.appendChild(tab);
-    });
-  }
-
-  function renderComponents(filteredComponents = components) {
-    componentsContainer.innerHTML = "";
-    categoryNav.innerHTML = "";
-    mobileNav.innerHTML = "";
-
-    const grouped = filteredComponents.reduce((acc, comp) => {
-      if (!acc[comp.category]) acc[comp.category] = [];
-      acc[comp.category].push(comp);
-      return acc;
-    }, {});
-
-    Object.keys(grouped).forEach(category => {
-      const section = document.createElement("section");
-      section.id = `section-${category}`;
-      section.className = "mb-12";
-
-      const heading = document.createElement("h2");
-      heading.textContent = category;
-      heading.className = "text-2xl font-bold mb-4 mt-8 scroll-mt-28";
-      section.appendChild(heading);
-
-      grouped[category].forEach(comp => {
-        const card = document.createElement("div");
-        card.className = "mb-6 p-4 bg-white border border-gray-300 rounded shadow";
-        const title = document.createElement("h3");
-        title.textContent = comp.name;
-        title.className = "font-semibold mb-2";
-        const preview = document.createElement("div");
-        preview.innerHTML = comp.html;
-        preview.className = "mb-2";
-        card.appendChild(title);
-        card.appendChild(preview);
-        section.appendChild(card);
-      });
-
-      componentsContainer.appendChild(section);
-
-      const navLink = document.createElement("button");
-      navLink.textContent = category;
-      navLink.className = "px-3 py-1 text-sm text-gray-700 hover:text-blue-600";
-      navLink.addEventListener("click", () => {
-        document.getElementById(`section-${category}`).scrollIntoView({ behavior: "smooth" });
-      });
-
-      const mobileLink = navLink.cloneNode(true);
-      mobileLink.addEventListener("click", () => {
-        mobileNav.classList.add("hidden");
-        document.getElementById(`section-${category}`).scrollIntoView({ behavior: "smooth" });
-      });
-
-      categoryNav.appendChild(navLink);
-      mobileNav.appendChild(mobileLink);
-    });
-  }
-
-  function handleSearch() {
-    const query = searchInput.value.toLowerCase();
-    const filtered = components.filter(comp =>
-      comp.name.toLowerCase().includes(query) || comp.category.toLowerCase().includes(query)
-    );
-    renderComponents(filtered);
-  }
-
-  function updateActiveNav() {
-    const scrollPos = window.scrollY + 150;
-
-    categories.forEach(category => {
-      const section = document.getElementById(`section-${category}`);
-      const link = [...categoryNav.children].find(btn => btn.textContent === category);
-      if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
-        link.classList.add("text-blue-600", "font-semibold");
-      } else {
-        link.classList.remove("text-blue-600", "font-semibold");
-      }
-    });
-  }
-
-  window.addEventListener("scroll", () => {
-    updateActiveNav();
-    if (window.scrollY > 300) {
-      backToTop.classList.remove("hidden");
-    } else {
-      backToTop.classList.add("hidden");
-    }
+fetch("components.json")
+  .then(res => res.json())
+  .then(components => {
+    allComponents = components;
+    renderComponents(components);
+    setupTabs(components);
+  })
+  .catch(err => {
+    console.error("Fehler beim Laden der components.json:", err);
+    container.innerHTML = `<p class="text-red-600">Fehler beim Laden der Komponenten. Prüfe die Konsole.</p>`;
   });
 
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function renderComponents(components) {
+  container.innerHTML = "";
+  nav.innerHTML = "";
+  mobileNav.innerHTML = "";
+
+  const categories = [...new Set(components.map(c => c.category))].sort();
+  const categorySections = {};
+
+  categories.forEach(cat => {
+    const link = document.createElement("a");
+    link.href = `#${cat}`;
+    link.textContent = cat;
+    link.className = "bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition transform hover:-translate-y-1";
+    nav.appendChild(link);
+    mobileNav.appendChild(link.cloneNode(true));
+
+    const section = document.createElement("section");
+    section.id = cat;
+    section.className = "mb-12";
+
+    const heading = document.createElement("h2");
+    heading.textContent = cat;
+    heading.className = "text-2xl font-semibold border-b-2 border-gray-300 pb-2 mb-6";
+    section.appendChild(heading);
+
+    const grid = document.createElement("div");
+    grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6";
+    section.appendChild(grid);
+
+    container.appendChild(section);
+    categorySections[cat] = grid;
   });
 
-  searchInput.addEventListener("input", handleSearch);
+  components
+    .sort((a, b) => a.category === b.category ? a.title.localeCompare(b.title) : a.category.localeCompare(b.category))
+    .forEach(component => {
+      fetch(component.file)
+        .then(res => res.ok ? res.text() : Promise.reject(`Datei nicht gefunden: ${component.file}`))
+        .then(html => {
+          const div = document.createElement("div");
+          div.className = "bg-white border border-gray-200 rounded-lg shadow p-4 hover:shadow-md transition";
+          div.innerHTML = `
+            <h3 class="text-lg font-bold mb-2">${component.title}</h3>
+            <div class="preview bg-gray-50 p-3 rounded border border-dashed border-gray-300 mb-4">${html}</div>
+            <pre class="relative bg-gray-100 p-3 rounded overflow-x-auto text-sm">
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">Copy</button>
+              <code>${html.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code>
+            </pre>
+          `;
+          categorySections[component.category].appendChild(div);
 
-  menuToggle.addEventListener("click", () => {
-    mobileNav.classList.toggle("hidden");
+          const copyBtn = div.querySelector(".copy-btn");
+          copyBtn.addEventListener("click", () => {
+            const codeText = div.querySelector("code").textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+              copyBtn.textContent = "Kopiert!";
+              setTimeout(() => copyBtn.textContent = "Copy", 2000);
+            });
+          });
+        })
+        .catch(err => console.error(err));
+    });
+}
+
+function setupTabs(components) {
+  const uniqueCategories = [...new Set(components.map(c => c.category))].sort();
+
+  tabsContainer.innerHTML = "";
+  uniqueCategories.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.textContent = cat;
+    btn.className = "tab-btn bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 text-sm";
+    btn.setAttribute("data-category", cat);
+    tabsContainer.appendChild(btn);
+
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("bg-gray-300", "font-semibold"));
+      btn.classList.add("bg-gray-300", "font-semibold");
+      filterByCategory(cat);
+    });
   });
+}
 
-  createTabs();
-  renderComponents();
+function filterByCategory(category) {
+  const filtered = allComponents.filter(c => c.category === category);
+  renderComponents(filtered);
+}
+
+// Live-Suche
+searchInput.addEventListener("input", e => {
+  const term = e.target.value.toLowerCase();
+  const filtered = allComponents.filter(c =>
+    c.title.toLowerCase().includes(term) ||
+    c.category.toLowerCase().includes(term)
+  );
+  renderComponents(filtered);
+});
+
+// Zurück nach oben
+window.addEventListener("scroll", () => {
+  backToTop.classList.toggle("hidden", window.scrollY < 300);
+});
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Mobile Menü
+document.getElementById("menu-toggle").addEventListener("click", () => {
+  mobileNav.classList.toggle("hidden");
 });
