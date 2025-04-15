@@ -1,58 +1,37 @@
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meine Komponentengalerie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 text-gray-800 font-sans">
-    <header class="bg-gray-900 text-white py-8 text-center">
-      <h1 class="text-4xl font-bold">Meine HTML-Komponentengalerie</h1>
-    </header>
+<body class="bg-gray-50 text-gray-800">
 
-    <nav id="category-nav" class="flex flex-wrap justify-center gap-4 p-4 bg-gray-200 border border-gray-300 rounded-xl mx-4 mt-6"></nav>
+  <header class="site-header">
+    <h1>Meine HTML-Komponentengalerie</h1>
+  </header>
 
-<!-- Neue Übersicht aus README.md -->
-  <section class="container mx-auto px-4 py-6 max-w-4xl bg-white border border-gray-200 rounded-xl shadow-sm" id="intro-section">
-    <h2 class="text-2xl font-bold mb-4">✨ Meine HTML-Komponentenbibliothek</h2>
-    <p class="mb-6">
-      Willkommen in meiner Sammlung wiederverwendbarer HTML/CSS/JS-Komponenten.  
-      Diese Galerie ist über GitHub Pages erreichbar und dient als visuelle Vorschau & Snippet-Sammlung für zukünftige Projekte.
-    </p>
+  <!-- Sticky Kategorie-Navigation -->
+  <nav id="category-nav" class="sticky top-0 z-30 bg-white shadow-md py-3 px-4 flex flex-wrap gap-2 justify-center border-b border-gray-200">
+    <!-- wird per JS befüllt -->
+  </nav>
 
-    <div class="mb-6">
-      <h3 class="text-xl font-semibold mb-2">🔗 Nützliche Links für Webdesign & UI/UX</h3>
-      <ul class="space-y-1 list-disc list-inside text-blue-700 underline">
-        <li><a href="https://uiverse.io" target="_blank">🎨 Uiverse.io – kostenlose UI-Komponenten</a></li>
-        <li><a href="https://dribbble.com" target="_blank">💡 Dribbble – Design-Inspiration</a></li>
-        <li><a href="https://developer.mozilla.org/de/" target="_blank">📘 MDN Web Docs – Web-Standards & Doku</a></li>
-        <li><a href="https://heroicons.com" target="_blank">🧩 Heroicons – SVG-Icons</a></li>
-        <li><a href="https://tailwindcss.com" target="_blank">🚀 Tailwind CSS – modernes Utility-First-CSS</a></li>
-        <li><a href="https://www.frontendmentor.io" target="_blank">🧠 Frontend Mentor – Übungsprojekte für UI</a></li>
-        <li><a href="https://www.canva.com/colors/" target="_blank">🎨 Canva Colors – Farbinspiration und Tools</a></li>
-        <li><a href="https://fontawesome.com" target="_blank">⭐ Font Awesome – Beliebte Icon-Bibliothek</a></li>
-        <li><a href="https://michalsnik.github.io/aos/" target="_blank">🎬 AOS - Animate on Scroll – Scroll-Animationen leicht gemacht</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-semibold mb-2">🛠️ Verwendung</h3>
-      <ol class="list-decimal list-inside space-y-1">
-        <li>Galerie lokal starten oder per GitHub Pages veröffentlichen</li>
-        <li>Komponenten nach Kategorie durchstöbern</li>
-        <li>HTML-Snippets einfach kopieren & verwenden</li>
-      </ol>
-    </div>
+  <!-- Nützliche Links aus der README -->
+  <section class="max-w-4xl mx-auto my-8 px-4">
+    <h2 class="text-xl font-bold mb-4">🔗 Nützliche Links für Webdesign & UI/UX</h2>
+    <ul class="list-disc pl-6 space-y-2 text-blue-600">
+      <li><a href="https://uiverse.io" target="_blank" class="hover:underline">🎨 Uiverse.io</a></li>
+      <li><a href="https://dribbble.com" target="_blank" class="hover:underline">💡 Dribbble</a></li>
+      <li><a href="https://developer.mozilla.org/de/" target="_blank" class="hover:underline">📘 MDN Web Docs</a></li>
+      <li><a href="https://heroicons.com" target="_blank" class="hover:underline">🧩 Heroicons</a></li>
+      <li><a href="https://tailwindcss.com" target="_blank" class="hover:underline">🚀 Tailwind CSS</a></li>
+      <li><a href="https://www.frontendmentor.io" target="_blank" class="hover:underline">🧠 Frontend Mentor</a></li>
+      <li><a href="https://www.canva.com/colors/" target="_blank" class="hover:underline">🎨 Canva Colors</a></li>
+      <li><a href="https://fontawesome.com" target="_blank" class="hover:underline">⭐ Font Awesome</a></li>
+      <li><a href="https://michalsnik.github.io/aos/" target="_blank" class="hover:underline">🎬 AOS - Animate on Scroll</a></li>
+    </ul>
   </section>
 
-    <main id="components-container" class="max-w-7xl mx-auto px-4 py-8"></main>
+  <main class="container mx-auto px-4">
+    <div id="components-container"></div>
+  </main>
 
-    <footer class="bg-gray-900 text-white text-center py-4 mt-10">
-      <p>&copy; 2025 Meine Komponentengalerie</p>
-    </footer>
+  <footer class="site-footer">
+    <p>&copy; 2025 Meine Komponentengalerie</p>
+  </footer>
 
-  
   <script src="scripts/loader.js"></script>
 </body>
-</html>
