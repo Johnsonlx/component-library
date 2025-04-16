@@ -2,227 +2,120 @@ html {
   scroll-behavior: smooth;
 }
 
-.active-link {
-    background-color: #1f2937 !important;
-    transform: translateY(-2px);
-}
-
-.active-category {
-        background-color: #1f2937 !important;
-}
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  @apply font-sans bg-gray-100 text-gray-800 transition-colors duration-300;
   margin: 0;
-  background: #f4f6f8;
-  color: #333;
-  line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  @apply max-w-7xl mx-auto px-6;
 }
 
-.site-header, .site-footer {
-  background-color: #1f2937;
-  color: white;
-  padding: 1.5rem 0;
-  text-align: center;
+.site-header,
+.site-footer {
+  @apply bg-gray-900 text-white text-center py-6;
 }
 
 .site-header h1 {
-  margin: 0 0 1rem;
-  font-size: 2.5rem;
+  @apply text-4xl mb-4;
 }
 
 .site-main h2 {
-  margin-top: 2.5rem;
-  border-bottom: 3px solid #e5e7eb;
-  padding-bottom: 0.5rem;
-  font-size: 1.8rem;
-  color: #111827;
+  @apply mt-10 border-b-4 border-gray-200 pb-2 text-2xl text-gray-900;
 }
 
 h1 {
-  text-align: center;
-  font-size: 2rem;
+  @apply text-center text-2xl;
 }
 
 h2 {
-  margin-top: 3rem;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 0.3rem;
+  @apply mt-12 border-b-2 border-gray-300 pb-1;
 }
 
 .category-section {
-  display: grid;
+  @apply grid gap-8 mb-16;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
 }
 
 .component {
-  background: white;
-  border: 1px solid #e5e7eb;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.10);
-  transition: transform 0.3s ease;
+  @apply bg-white border border-gray-200 p-6 rounded-xl shadow-md transform transition-transform duration-300;
 }
 
 .component:hover {
-  transform: scale(1.01);
+  @apply scale-105;
 }
 
-.component h3 {
-  margin-top: 0;
-  font-size: 1.3rem;
-  color: #1f2937;
+.component h3,
+.component-title {
+  @apply text-xl font-semibold text-gray-800 mb-4;
 }
 
 .preview {
-  margin: 1.2rem 0;
-  padding: 1rem;
-  background: #f9fafb;
-  border-radius: 8px;
-  border: 1px dashed #d1d5db;
+  @apply w-full bg-gray-50 border border-dashed border-gray-300 rounded-lg p-6;
 }
 
 pre {
-  background: #f3f4f6;
-  padding: 1rem;
-  overflow-x: auto;
-  border-radius: 8px;
-  position: relative;
-  font-size: 0.9rem;
+  @apply bg-gray-100 p-4 overflow-x-auto rounded-lg text-sm relative;
 }
 
 code {
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-family: 'Courier New', Courier, monospace;
+  @apply whitespace-pre-wrap break-words font-mono;
 }
 
 .copy-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.8rem;
+  @apply absolute top-2 right-2 bg-blue-500 text-white text-sm px-3 py-1.5 rounded cursor-pointer;
 }
 
 .copy-btn:hover {
-  background-color: #2563eb;
+  @apply bg-blue-600;
 }
 
-.category-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
+/* Kategorie-Navigation */
 #category-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: 1rem;
-  background-color: #e5e7eb;
-  border-radius: 1rem;
-  justify-content: center;
-  border: 1px solid #d1d5db;
+  @apply flex flex-wrap gap-3 p-4 bg-gray-200 border border-gray-300 rounded-2xl justify-center mb-6;
 }
 
-.category-nav a,
 #category-nav a {
-  text-decoration: none;
-  color: white;
-  background-color: #374151;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: background 0.3s, transform 0.2s;
+  @apply no-underline text-white bg-gray-700 px-4 py-2 rounded-md font-medium transition duration-200;
 }
 
-.category-nav a:hover,
 #category-nav a:hover {
-  background-color: #1f2937;
+  @apply bg-gray-900 -translate-y-0.5;
+}
+
+/* Aktive Tabs und Kategorien */
+.active-link,
+.active-category {
+  @apply bg-gray-900 text-white !important;
   transform: translateY(-2px);
 }
 
+.tab-link {
+  @apply transition;
+}
 
-.dark .active-category {
-  background-color: #374151 !important;
+.tab-link.bg-blue-600 {
+  @apply bg-blue-600 text-white !important;
+}
+
+.category-tab.active-tab {
+  @apply bg-blue-700 text-white !important;
+}
+
+/* Vorschau Dark Mode */
+.dark .preview {
+  @apply bg-gray-800 border-gray-700;
 }
 
 .dark .copy-btn {
-  background-color: #3b82f6;
-  color: white;
+  @apply bg-blue-500 text-white;
 }
 
 .dark .copy-btn:hover {
-  background-color: #2563eb;
+  @apply bg-blue-600;
 }
 
-
-.tab-link.bg-blue-600 {
-  background-color: #2563eb !important;
-  color: #fff !important;
-}
-
-.tab-link {
-  transition: all 0.2s;
-}
-
-.preview {
-  background: #f9fafb;
-  border-radius: 8px;
-  border: 1px dashed #d1d5db;
-}
-
-
-.category-tab.active-tab {
-  background-color: #1d4ed8 !important;
-  color: white !important;
-}
-
+.dark .active-category,
 .dark .category-tab.active-tab {
-  background-color: #2563eb !important;
-}
-
-/* Komponente über gesamte Breite */
-.component-wrapper {
-  width: 100%;
-}
-
-/* Optional: Vorschau-Container vollflächig */
-.preview {
-  width: 100%;
-  background: #f9fafb;
-  border-radius: 8px;
-  border: 1px dashed #d1d5db;
-  padding: 1.5rem;
-}
-
-/* Einheitliche h3-Stil für Komponentenüberschrift */
-.component-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #1f2937;
-}
-
-/* In dark mode */
-.dark .preview {
-  background-color: #1f2937;
-  border-color: #374151;
+  @apply bg-blue-600 text-white;
 }
