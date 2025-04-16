@@ -28,24 +28,30 @@ fetch("components.json")
     // Initiale Anzeige
     renderComponents(components);
 
-    // Filter-Funktion
-    document.querySelectorAll(".category-tab").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const selectedCat = btn.dataset.category;
-        currentCategory = selectedCat;
+// Kategorie-Button Events
+document.querySelectorAll(".category-tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const selectedCat = btn.dataset.category;
+    currentCategory = selectedCat;
 
-        document.querySelectorAll(".category-tab").forEach(b => b.classList.remove("active-tab"));
-        btn.classList.add("active-tab");
-
-        if (selectedCat === "ALL") {
-          renderComponents(allComponents);
-        } else {
-          const filtered = allComponents.filter(c => c.category === selectedCat);
-          renderComponents(filtered);
-        }
-      });
+    // Alle Tabs zurücksetzen
+    document.querySelectorAll(".category-tab").forEach(b => {
+      b.classList.remove("bg-blue-600", "text-white", "dark:bg-blue-500");
+      b.classList.add("bg-gray-200", "dark:bg-gray-700");
     });
+
+    // Aktiven Tab hervorheben
+    btn.classList.remove("bg-gray-200", "dark:bg-gray-700");
+    btn.classList.add("bg-blue-600", "text-white", "dark:bg-blue-500");
+
+    if (selectedCat === "ALL") {
+      renderComponents(allComponents);
+    } else {
+      const filtered = allComponents.filter(c => c.category === selectedCat);
+      renderComponents(filtered);
+    }
   });
+});
 
 // 🔁 RENDER-FUNKTION für Komponenten
 function renderComponents(components) {
