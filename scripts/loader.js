@@ -20,7 +20,7 @@ fetch("components.json")
     categories.forEach(cat => {
       const link = document.createElement("button");
       link.textContent = cat;
-      link.className = "category-tab px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition";
+      link.className = "category-tab px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-gray-600 transition";
       link.dataset.category = cat;
       nav.appendChild(link);
     });
