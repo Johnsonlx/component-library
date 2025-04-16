@@ -198,3 +198,31 @@ code {
 .dark .category-tab.active-tab {
   background-color: #2563eb !important;
 }
+
+/* Komponente über gesamte Breite */
+.component-wrapper {
+  width: 100%;
+}
+
+/* Optional: Vorschau-Container vollflächig */
+.preview {
+  width: 100%;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px dashed #d1d5db;
+  padding: 1.5rem;
+}
+
+/* Einheitliche h3-Stil für Komponentenüberschrift */
+.component-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+/* In dark mode */
+.dark .preview {
+  background-color: #1f2937;
+  border-color: #374151;
+}
