@@ -27,9 +27,7 @@
     { "category": "Navbars", "title": "Dropdown Navbar", "file": "components/navbars/navbar-dropdown.html" },
     { "category": "Navbars", "title": "Responsive Navbar", "file": "components/navbars/navbar-responsive.html" },
     { "category": "Navbars", "title": "Custom Navbar 1", "file": "components/navbars/navbar1.html" },
-    { "category": "Navbars", "title": "Navbar Tailwind", "file": "components/navbars/navbar-tailwind.html" },
-    { "category": "Navbars", "title": "Tabs Variante", "file": "components/navbars/tabs-variante.html" },
-    
+    { "category": "Navbars", "title": "Navbar Tailwind", "file": "components/navbars/navbar-tailwind.html" },    
   
     { "category": "Tooltips", "title": "Basic Tooltip", "file": "components/tooltips/tooltip-basic.html" },
     { "category": "Tooltips", "title": "Icon Tooltip", "file": "components/tooltips/tooltip-icon.html" },
