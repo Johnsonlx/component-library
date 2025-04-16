@@ -1,6 +1,14 @@
 const container = document.getElementById("components-container");
 const nav = document.getElementById("category-nav");
 let allComponents = [];
+let currentCategory = null;
+
+// "Alle anzeigen" Button erstellen
+const allButton = document.createElement("button");
+allButton.textContent = "Alle anzeigen";
+allButton.className = "category-tab px-4 py-2 rounded bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 transition active-tab";
+nav.appendChild(allButton);
+allButton.dataset.category = "ALL";
 
 fetch("components.json")
   .then(res => res.json())
@@ -18,23 +26,25 @@ fetch("components.json")
 
     renderComponents(components);
 
-    // Kategorie-Filter
+    // Eventlistener für Buttons (inkl. "Alle anzeigen")
     document.querySelectorAll(".category-tab").forEach(btn => {
       btn.addEventListener("click", () => {
         const selectedCat = btn.dataset.category;
+        currentCategory = selectedCat;
 
-        document.querySelectorAll(".category-tab").forEach(b => {
-          b.classList.remove("active-tab");
-        });
+        document.querySelectorAll(".category-tab").forEach(b => b.classList.remove("active-tab"));
         btn.classList.add("active-tab");
 
-        const filtered = allComponents.filter(c => c.category === selectedCat);
-        renderComponents(filtered);
+        if (selectedCat === "ALL") {
+          renderComponents(allComponents);
+        } else {
+          const filtered = allComponents.filter(c => c.category === selectedCat);
+          renderComponents(filtered);
+        }
       });
     });
   });
 
-// Komponentendarstellung
 function renderComponents(components) {
   container.innerHTML = "";
 
@@ -74,6 +84,9 @@ document.getElementById("search").addEventListener("input", e => {
     c.title.toLowerCase().includes(term) || c.category.toLowerCase().includes(term)
   );
   renderComponents(filtered);
+
+  // Tabs visuell zurücksetzen, wenn Suche aktiv ist
+  document.querySelectorAll(".category-tab").forEach(b => b.classList.remove("active-tab"));
 });
 
 // Dark Mode Toggle
