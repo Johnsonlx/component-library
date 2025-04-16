@@ -3,13 +3,14 @@ const nav = document.getElementById("category-nav");
 let allComponents = [];
 let currentCategory = null;
 
-// "Alle anzeigen" Button erstellen
+// "Alle anzeigen"-Button erstellen
 const allButton = document.createElement("button");
 allButton.textContent = "Alle anzeigen";
 allButton.className = "category-tab px-4 py-2 rounded bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 transition active-tab";
-nav.appendChild(allButton);
 allButton.dataset.category = "ALL";
+nav.appendChild(allButton);
 
+// Fetch Komponenten
 fetch("components.json")
   .then(res => res.json())
   .then(components => {
@@ -26,7 +27,7 @@ fetch("components.json")
 
     renderComponents(components);
 
-    // Eventlistener für Buttons (inkl. "Alle anzeigen")
+    // Kategorie-Button Events
     document.querySelectorAll(".category-tab").forEach(btn => {
       btn.addEventListener("click", () => {
         const selectedCat = btn.dataset.category;
@@ -45,8 +46,15 @@ fetch("components.json")
     });
   });
 
+// Komponenten-Rendering
 function renderComponents(components) {
   container.innerHTML = "";
+
+  // "Nützliche Links"-Sektion anzeigen/verstecken
+  const staticLinks = document.getElementById("static-links");
+  if (staticLinks) {
+    staticLinks.style.display = (components.length === allComponents.length) ? "block" : "none";
+  }
 
   components.forEach(component => {
     fetch(component.file)
