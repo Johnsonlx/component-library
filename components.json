@@ -32,5 +32,8 @@
     { "category": "Tooltips", "title": "Basic Tooltip", "file": "components/tooltips/tooltip-basic.html" },
     { "category": "Tooltips", "title": "Icon Tooltip", "file": "components/tooltips/tooltip-icon.html" },
     { "category": "Tooltips", "title": "Positioned Tooltip", "file": "components/tooltips/tooltip-positions.html" },
-    { "category": "Tooltips", "title": "Custom Tooltip 1", "file": "components/tooltips/tooltip1.html" }
+    { "category": "Tooltips", "title": "Custom Tooltip 1", "file": "components/tooltips/tooltip1.html" },
+
+    { "category": "Sonstiges", "title": "Hero-Sektion mit Aktionsbanner", "file": "components/sonstiges/hero-sektion.html" },
+    { "category": "Sonstiges", "title": "Newsletter-Anmeldung", "file": "components/sonstiges/newsletter-anmeldung.html" }
   ]
