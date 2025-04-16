@@ -6,7 +6,7 @@ let currentCategory = null;
 // "Alle anzeigen"-Button erstellen
 const allButton = document.createElement("button");
 allButton.textContent = "Alle anzeigen";
-allButton.className = "category-tab px-4 py-2 rounded bg-blue-600 text-white dark:bg-blue-500 transition";
+allButton.className = "category-tab px-4 py-2 rounded bg-blue-600 text-white dark:bg-blue-500 hover:bg-green-300 dark:hover:bg-green-600 transition";
 allButton.dataset.category = "ALL";
 nav.appendChild(allButton);
 
@@ -20,7 +20,7 @@ fetch("components.json")
     categories.forEach(cat => {
       const link = document.createElement("button");
       link.textContent = cat;
-      link.className = "category-tab px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-gray-600 transition";
+      link.className = "category-tab px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-green-600 transition";
       link.dataset.category = cat;
       nav.appendChild(link);
     });
