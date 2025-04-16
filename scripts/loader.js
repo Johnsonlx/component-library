@@ -10,7 +10,7 @@ allButton.className = "category-tab px-4 py-2 rounded bg-gray-300 dark:bg-gray-6
 allButton.dataset.category = "ALL";
 nav.appendChild(allButton);
 
-// Fetch Komponenten
+// Komponenten laden und Buttons generieren
 fetch("components.json")
   .then(res => res.json())
   .then(components => {
@@ -25,9 +25,10 @@ fetch("components.json")
       nav.appendChild(link);
     });
 
+    // Initiale Anzeige
     renderComponents(components);
 
-    // Kategorie-Button Events
+    // Filter-Funktion
     document.querySelectorAll(".category-tab").forEach(btn => {
       btn.addEventListener("click", () => {
         const selectedCat = btn.dataset.category;
@@ -46,6 +47,7 @@ fetch("components.json")
     });
   });
 
+// 🔁 RENDER-FUNKTION für Komponenten
 function renderComponents(components) {
   container.innerHTML = "";
 
@@ -60,19 +62,18 @@ function renderComponents(components) {
       .then(res => res.text())
       .then(html => {
         const wrapper = document.createElement("div");
-        wrapper.className = "component-wrapper w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10";
+        wrapper.className = "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-4 mb-6";
+        wrapper.setAttribute("data-category", component.category.toLowerCase());
+        wrapper.setAttribute("data-title", component.title.toLowerCase());
 
         wrapper.innerHTML = `
-          <h3 class="component-title text-xl font-semibold mb-4 text-gray-900 dark:text-white">${component.title}</h3>
-          <div class="preview w-full bg-gray-50 dark:bg-gray-700 p-4 rounded border border-dashed border-gray-300 dark:border-gray-600 mb-4">
-            ${html}
-          </div>
-          <pre class="relative bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white p-4 rounded overflow-x-auto text-sm">
+          <h3 class="text-lg font-bold mb-2">${component.title}</h3>
+          <div class="preview bg-gray-50 dark:bg-gray-700 p-3 rounded border border-dashed border-gray-300 dark:border-gray-600 mb-4">${html}</div>
+          <pre class="relative bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-3 rounded overflow-x-auto text-sm">
             <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">Copy</button>
             <code>${html.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code>
           </pre>
         `;
-
         container.appendChild(wrapper);
 
         // Copy-Button
@@ -88,19 +89,22 @@ function renderComponents(components) {
   });
 }
 
-// Suche
+// 🔍 Suchfeld
 document.getElementById("search").addEventListener("input", e => {
   const term = e.target.value.toLowerCase();
+
+  // Alle Komponenten filtern
   const filtered = allComponents.filter(c =>
     c.title.toLowerCase().includes(term) || c.category.toLowerCase().includes(term)
   );
+
   renderComponents(filtered);
 
-  // Tabs visuell zurücksetzen, wenn Suche aktiv ist
+  // Tabs optisch zurücksetzen
   document.querySelectorAll(".category-tab").forEach(b => b.classList.remove("active-tab"));
 });
 
-// Dark Mode Toggle
+// 🌙 Dark Mode Toggle
 document.getElementById("darkToggle").addEventListener("click", () => {
   document.documentElement.classList.toggle("dark");
   localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
@@ -109,7 +113,7 @@ if (localStorage.getItem("theme") === "dark") {
   document.documentElement.classList.add("dark");
 }
 
-// Back to Top
+// ⬆️ Zurück nach oben
 const backToTop = document.getElementById("backToTop");
 window.addEventListener("scroll", () => {
   backToTop.classList.toggle("hidden", window.scrollY < 300);
