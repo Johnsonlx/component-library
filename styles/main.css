@@ -17,6 +17,7 @@ body {
   background: #f4f6f8;
   color: #333;
   line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -180,4 +181,20 @@ code {
 
 .tab-link {
   transition: all 0.2s;
+}
+
+.preview {
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px dashed #d1d5db;
+}
+
+
+.category-tab.active-tab {
+  background-color: #1d4ed8 !important;
+  color: white !important;
+}
+
+.dark .category-tab.active-tab {
+  background-color: #2563eb !important;
 }
