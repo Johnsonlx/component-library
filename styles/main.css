@@ -171,3 +171,13 @@ code {
 .dark .copy-btn:hover {
   background-color: #2563eb;
 }
+
+
+.tab-link.bg-blue-600 {
+  background-color: #2563eb !important;
+  color: #fff !important;
+}
+
+.tab-link {
+  transition: all 0.2s;
+}
