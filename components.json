@@ -18,6 +18,8 @@
     { "category": "Forms", "title": "Custom Form 1", "file": "components/forms/form1.html" },
     { "category": "Forms", "title": "Search Form", "file": "components/forms/search-form.html" },
     { "category": "Forms", "title": "Multi Step Form", "file": "components/forms/multi-step-form.html" },
+    { "category": "Forms", "title": "Tabbed Form", "file": "components/forms/tabbed-form.html" },
+    { "category": "Forms", "title": "Upload Form", "file": "components/forms/upload-form.html" },
   
     { "category": "Modals", "title": "Confirmation Modal", "file": "components/modals/modal-confirmation.html" },
     { "category": "Modals", "title": "Image Modal", "file": "components/modals/modal-image.html" },
