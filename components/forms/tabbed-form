@@ -1,0 +1,55 @@
+<div class="max-w-3xl mx-auto">
+  <div class="flex space-x-2 mb-4">
+    <button class="tab-btn px-4 py-2 rounded bg-blue-600 text-white" data-tab="1">Persönlich</button>
+    <button class="tab-btn px-4 py-2 rounded bg-gray-200" data-tab="2">Kontakt</button>
+    <button class="tab-btn px-4 py-2 rounded bg-gray-200" data-tab="3">Einstellungen</button>
+  </div>
+
+  <form class="space-y-6">
+    <div class="tab-content block" data-tab="1">
+      <label class="block font-medium">Vorname</label>
+      <input class="w-full border rounded p-2 mb-4" type="text" />
+      
+      <label class="block font-medium">Nachname</label>
+      <input class="w-full border rounded p-2" type="text" />
+    </div>
+
+    <div class="tab-content hidden" data-tab="2">
+      <label class="block font-medium">E-Mail</label>
+      <input class="w-full border rounded p-2 mb-4" type="email" />
+      
+      <label class="block font-medium">Telefon</label>
+      <input class="w-full border rounded p-2" type="tel" />
+    </div>
+
+    <div class="tab-content hidden" data-tab="3">
+      <label class="block font-medium">Benachrichtigungen</label>
+      <select class="w-full border rounded p-2">
+        <option>Per E-Mail</option>
+        <option>Per SMS</option>
+        <option>Keine</option>
+      </select>
+    </div>
+
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Absenden</button>
+  </form>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll(".tab-btn");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selected = btn.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove("bg-blue-600", "text-white"));
+      btn.classList.add("bg-blue-600", "text-white");
+
+      contents.forEach(c => {
+        c.classList.toggle("hidden", c.dataset.tab !== selected);
+        c.classList.toggle("block", c.dataset.tab === selected);
+      });
+    });
+  });
+</script>
