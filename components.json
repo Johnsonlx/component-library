@@ -17,6 +17,7 @@
     { "category": "Forms", "title": "Login Form", "file": "components/forms/form-login.html" },
     { "category": "Forms", "title": "Custom Form 1", "file": "components/forms/form1.html" },
     { "category": "Forms", "title": "Search Form", "file": "components/forms/search-form.html" },
+    { "category": "Forms", "title": "Multi Step Form", "file": "components/forms/multi-step-form.html" },
   
     { "category": "Modals", "title": "Confirmation Modal", "file": "components/modals/modal-confirmation.html" },
     { "category": "Modals", "title": "Image Modal", "file": "components/modals/modal-image.html" },
