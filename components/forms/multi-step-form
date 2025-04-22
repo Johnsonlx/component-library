@@ -1,0 +1,80 @@
+<div class="w-full max-w-2xl mx-auto">
+  <div id="step-progress" class="flex mb-6">
+    <div class="flex-1 text-center text-sm font-medium step-indicator text-blue-600">Schritt 1</div>
+    <div class="flex-1 text-center text-sm font-medium step-indicator text-gray-400">Schritt 2</div>
+    <div class="flex-1 text-center text-sm font-medium step-indicator text-gray-400">Schritt 3</div>
+  </div>
+
+  <form id="multiStepForm" class="space-y-6">
+    <div class="form-step block">
+      <div>
+        <label class="block font-medium mb-1">Name</label>
+        <input type="text" class="w-full p-2 border rounded" required />
+      </div>
+      <div>
+        <label class="block font-medium mb-1">E-Mail</label>
+        <input type="email" class="w-full p-2 border rounded" required />
+      </div>
+    </div>
+
+    <div class="form-step hidden">
+      <div>
+        <label class="block font-medium mb-1">Adresse</label>
+        <input type="text" class="w-full p-2 border rounded" required />
+      </div>
+      <div>
+        <label class="block font-medium mb-1">PLZ / Ort</label>
+        <input type="text" class="w-full p-2 border rounded" required />
+      </div>
+    </div>
+
+    <div class="form-step hidden">
+      <div>
+        <label class="block font-medium mb-1">Nachricht</label>
+        <textarea class="w-full p-2 border rounded" rows="4" required></textarea>
+      </div>
+    </div>
+
+    <div class="flex justify-between">
+      <button type="button" id="prevBtn" class="px-4 py-2 bg-gray-300 rounded hidden">Zurück</button>
+      <button type="button" id="nextBtn" class="px-4 py-2 bg-blue-600 text-white rounded">Weiter</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const steps = document.querySelectorAll(".form-step");
+  const indicators = document.querySelectorAll(".step-indicator");
+  let current = 0;
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    if (current < steps.length - 1) {
+      steps[current].classList.add("hidden");
+      indicators[current].classList.remove("text-blue-600");
+      indicators[current].classList.add("text-gray-400");
+      current++;
+      steps[current].classList.remove("hidden");
+      indicators[current].classList.add("text-blue-600");
+      indicators[current].classList.remove("text-gray-400");
+    }
+    toggleButtons();
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    steps[current].classList.add("hidden");
+    indicators[current].classList.remove("text-blue-600");
+    indicators[current].classList.add("text-gray-400");
+    current--;
+    steps[current].classList.remove("hidden");
+    indicators[current].classList.add("text-blue-600");
+    indicators[current].classList.remove("text-gray-400");
+    toggleButtons();
+  });
+
+  function toggleButtons() {
+    document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+    document.getElementById("nextBtn").textContent = (current === steps.length - 1) ? "Absenden" : "Weiter";
+  }
+
+  toggleButtons();
+</script>
